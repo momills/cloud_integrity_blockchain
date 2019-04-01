@@ -1,100 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Thesis Project 201724060103</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Thesis Project 201724060103</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        .display-download-progress {
+          display: none;
+        }
+        </style>
 </head>
+
 <body>
   <div class="panel">
     <div class="panel-heading panel-success" align="center">
-    <h3>A SECURITY MECHANISM ENSURING CLOUD DATA INTEGRITY WITH BLOCKCHAIN</h3>
-    <h4>MSc PROJECT by MICHAEL ODARTEI MILLS 201724060103</h4>
+      <h3>A SECURITY MECHANISM ENSURING CLOUD DATA INTEGRITY WITH BLOCKCHAIN</h3>
+      <h4>MSc PROJECT by MICHAEL ODARTEI MILLS 201724060103</h4>
     </div>
   </div>
 
-    <div class="row" style="margin-top: 3%">
-        <div class="col-lg-4 col-md-4 col-sm-12" style="margin-left:10%">
-            <form onsubmit="App.hashCompute(); return false;" enctype="multipart/form-data">
-              <div class="form-group">
-                <input type="file" onclick="clearUpload()" name="file" id="file" class="col-md-6 form-control" required>
-                <div class="form-control">
-                    <input type="submit" class="btn btn-success btn-sm" value="Upload!" style="margin:10px">
-                </div>
-              </div>
-            </form>
-            <div>
-                  <div class="form-group" style="margin-top:10%">
-                      <label for="chunkSize">Chunk Size in Bytes </label>
-                      <input type="text" id="chunkSize" class="form-control"  value="10485760"/>
-                  </div>
-                  <div class="form-group">
-                      <label for="fileSize">File size</label>
-                      <input type="text" id="fileSize" class="form-control"/>
-                  </div>
-                  <div class="form-group">
-                      <label for="timeDelta">Hash <i>COMPLETED</i> in:</label>
-                      <input type="text" id="timeDelta" class="form-control"/>
-                  </div>
-                  <div >
-                      <input type="submit" id="getTag" onclick="App.tagCompute(); return false;" class="btn btn-success btn-sm" value="Get TAG!" style="margin:5px">
-                  </div>
-                  <div class="">
-                    <strong><p id="upload-success" class="alert alert-success" style="margin-top: 10px; display:none">Tag is: </p></strong>
-                  </div>
-                <div style="margin-top:5%" class="well">
-                  <div class="form-group" >
-                      <input type="submit" onclick="fillDownld(); return false;" value="Download"> This part is only a demonstration
-                       of what to expect when a download request is made to the CSP</input>
-                  </div>
-                  <div class="form-group">
-                      <label for="downName">File Name</label>
-                      <input type="text" id="downName" class="form-control"/>
-                  </div>
-                  <div class="form-group">
-                      <label for="downSize">File Size</label>
-                      <input type="text" id="downSize" class="form-control"/>
-                  </div>
-                  <div class="form-group">
-                      <label for="downTag">File Tag</label>
-                      <input type="text" id="downTag" class="form-control"/>
-                  </div>
-                </div>
-              </div>
+  <div class="row" style="margin-top: 3%">
+    <div class="col-lg-4 col-md-4 col-sm-12" style="margin-left:10%">
+      <form onsubmit="App.hashCompute(); return false;" enctype="multipart/form-data">
+        <div class="form-group">
+          <input type="file" onclick="clearUpload()" name="file" id="file" class="col-md-6 form-control" required>
+          <div class="form-control">
+            <input type="submit" class="btn btn-success btn-sm" value="Upload!" style="margin:10px" onclick="uploadProgress()">
+          </div>
+        </div>
+      </form>
+      <div>
+          <div class="progress display-download-progress" id="upload-progress" style="margin-top:10%">
+            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+              100%
             </div>
-        <div class="col-lg-4 col-md-4 col-sm-12" style="margin-left:10%">
-            <form onSubmit="App.hashSearch(); return false;" enctype="multipart/form-data">
-            <div class="form-group">
-                <input type="search" name="tag_search" id="tag_search" class="col-md-6 form-control" placeholder="Search By Tag" required>
-                <div class="form-control">
-                    <input type="submit" id="clickSearch" class="btn btn-info btn-sm" value="Search!" style="margin:10px">
-                </div>
-            </div>
-        </form>
+          </div>
+        <div class="form-group" style="margin-top:10%">
+          <label for="chunkSize">Chunk Size in Bytes </label>
+          <input type="text" id="chunkSize" class="form-control" value="10485760" />
+        </div>
+        <div class="form-group">
+          <label for="fileSize">File size</label>
+          <input type="text" id="fileSize" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="timeDelta">Hash <i>COMPLETED</i> in:</label>
+          <input type="text" id="timeDelta" class="form-control" />
+        </div>
+        <div>
+          <input type="submit" id="getTag" onclick="App.tagCompute(); return false;" class="btn btn-success btn-sm"
+            value="Get TAG!" style="margin:5px">
+        </div>
         <div class="">
-          <strong><p class="alert alert-success" id="hash-search" style="margin-top: 50px; display:none">Found Hash Value: </p></strong>
+          <strong>
+            <p id="upload-success" class="alert alert-success" style="margin-top: 10px; display:none">Tag is: </p>
+          </strong>
         </div>
+        <div class="progress display-download-progress" id="download-progress" style="margin-top:5%;">
+            <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"
+              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+              100%
+            </div>
+          </div>
+        <div style="margin-top:5%" class="well">
+          <div class="form-group">
+            <input type="submit" onclick="fillDownld(); return false;" value="Download"> This part is only a
+            demonstration
+            of what to expect when a download request is made to the CSP</input>
+          </div>
+          <div class="form-group">
+            <label for="downName">File Name</label>
+            <input type="text" id="downName" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="downSize">File Size</label>
+            <input type="text" id="downSize" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="downTag">File Tag</label>
+            <input type="text" id="downTag" class="form-control" />
+          </div>
         </div>
+      </div>
     </div>
+    <div class="col-lg-4 col-md-4 col-sm-12" style="margin-left:10%">
+      <form onSubmit="App.hashSearch(); return false;" enctype="multipart/form-data">
+        <div class="form-group">
+          <input type="search" name="tag_search" id="tag_search" class="col-md-6 form-control"
+            placeholder="Search By Tag" required>
+          <div class="form-control">
+            <input type="submit" id="clickSearch" class="btn btn-info btn-sm" value="Search!" style="margin:10px">
+          </div>
+        </div>
+      </form>
+      <div class="">
+        <strong>
+          <p class="alert alert-success" id="hash-search" style="margin-top: 50px; display:none">Found Hash Value: </p>
+        </strong>
+      </div>
+    </div>
+  </div>
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="vendor/truffle-contract/dist/truffle-contract.js"></script>
-    <script src="dist/bundle.js"></script>
-    <script src="hashing.js"></script>
-    <script src="crypto-js/crypto-js.js"></script>
-    <script>
-      function fillDownld() {
-        $("#downName").val('Test.mat');
-        $("#downTag").val('de586190b1b92fde');
-        $("#downSize").val('3.05 GB');
-      }
-    </script>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="vendor/truffle-contract/dist/truffle-contract.js"></script>
+  <script src="dist/bundle.js"></script>
+  <script src="hashing.js"></script>
+  <script src="crypto-js/crypto-js.js"></script>
+  <script>
+    function fillDownld() {
+      $("#downName").val('Test.mat');
+      $("#downTag").val('de586190b1b92fde');
+      $("#downSize").val('3.05 GB');
+      $("#download-progress").removeClass("display-download-progress");
+    }
+    function uploadProgress() {
+      $("#upload-progress").removeClass("display-download-progress");
+    }
+  </script>
 
 </body>
+
 </html>
