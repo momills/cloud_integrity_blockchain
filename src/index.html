@@ -12,11 +12,14 @@
       .display-download-progress {
         display: none;
       }
-
-      .progress.active .progress-bar {
+      .display-upload-progress {
+        display: none;
+      }
+      /* .progress.active .progress-bar {
         -webkit-transition: none !important;
         transition: none !important;
-      }
+      } */
+
     </style>
 </head>
 
@@ -39,10 +42,10 @@
         </div>
       </form>
       <div>
-          <div class="progress display-download-progress" id="upload-progress" style="margin-top:10%">
+          <div class="progress display-upload-progress" id="upload-progress" style="margin-top:10%">
             <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
-              aria-valuenow="0" aria-valuemin="50" aria-valuemax="100" style="width:0%">
-              100%
+              aria-valuenow="0" aria-valuemin="50" aria-valuemax="90" style="width:0%" id="upload-bar">
+              Uploading file...
             </div>
           </div>
         <div class="form-group" style="margin-top:10%">
@@ -66,12 +69,7 @@
             <p id="upload-success" class="alert alert-success" style="margin-top: 10px; display:none">Tag is: </p>
           </strong>
         </div>
-        <div class="progress display-download-progress" id="download-progress" style="margin-top:5%;">
-            <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"
-              aria-valuenow="0" aria-valuemin="50" aria-valuemax="100" style="width:0%">
-              100%
-            </div>
-          </div>
+
         <div style="margin-top:5%" class="well">
 
           <div class="form-group">
@@ -132,20 +130,29 @@
     $("#downName").val('Test.mat');
     $("#downTag").val('de586190b1b92fde');
     $("#downSize").val('3.05 GB');
-    $(".progress-bar").animate({
-    width: "100%"
-    }, 1000);
     $("#download-progress").removeClass("display-download-progress");
     }
-    function uploadProgress() {
-    $("#upload-progress").removeClass("display-download-progress");
-    $(".progress-bar").animate({
-    width: "100%"
-    }, 600);
 
+    function uploadProgress() {
+    $("#upload-progress").removeClass("display-upload-progress");
+    // $("#upload-bar").animate({
+    // width: "100%"}, 1000);
+    var timerId = 0;
+    var ctr=0;
+    var max=9;
+
+    timerId = setInterval(function () {
+     // interval function
+     ctr++;
+     $('#upload-progress > .progress-bar').attr("style","width:" + ctr*max + "%");
+
+     // max reached?
+     if (ctr==max){
+       clearInterval(timerId);
+     }
+   }, 2000);
     }
   </script>
 
 </body>
-
 </html>
