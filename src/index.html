@@ -29,7 +29,7 @@
         <div class="form-group">
           <input type="file" onclick="clearUpload()" name="file" id="file" class="col-md-6 form-control" required>
           <div class="form-control">
-            <input type="submit" class="btn btn-success btn-sm" value="Upload!" style="margin:10px" onclick="uploadProgress()">
+            <input type="submit" class="btn btn-success btn-sm" value="Upload!" style="margin:10px">
           </div>
         </div>
       </form>
@@ -61,18 +61,20 @@
             <p id="upload-success" class="alert alert-success" style="margin-top: 10px; display:none">Tag is: </p>
           </strong>
         </div>
-        <div class="progress display-download-progress" id="download-progress" style="margin-top:5%;">
-            <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"
-              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-              100%
-            </div>
-          </div>
+
         <div style="margin-top:5%" class="well">
+
           <div class="form-group">
             <input type="submit" onclick="fillDownld(); return false;" value="Download"> This part is only a
             demonstration
             of what to expect when a download request is made to the CSP</input>
           </div>
+          <div class="progress display-download-progress" id="download-progress" style="margin-top:5%;">
+              <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"
+                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                100%
+              </div>
+            </div>
           <div class="form-group">
             <label for="downName">File Name</label>
             <input type="text" id="downName" class="form-control" />

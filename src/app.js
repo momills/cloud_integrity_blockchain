@@ -88,6 +88,9 @@ App = {
 
     //parse file and compute hash
     handleFiles()
+
+    //upload progress bar animation
+    uploadProgress()
 },
 
   tagCompute: () => {
