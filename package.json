@@ -24,7 +24,7 @@
     "siphash": "1.0.3",
     "truffle": "5.0.2",
     "truffle-contract": "3.0.6",
-    "webpack": "^4.29.6"
+    "webpack": "^5.75.0"
   },
   "dependencies": {}
 }
